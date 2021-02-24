@@ -18,14 +18,12 @@ class App extends React.Component {
   }
 
   render() {
-    const { generalInfo } = this.state;
-
     return (
       <div className="container">
         <div className="containerHeader">
           <h1>CV Builder</h1>
         </div>
-        <GeneralInfo info={generalInfo}/>
+        <GeneralInfo info={this.state.generalInfo}/>
         <Education />
         <PracticalExperience />
       </div>
