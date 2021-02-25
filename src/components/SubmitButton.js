@@ -4,7 +4,9 @@ import '../styles/Buttons.css'
 class SubmitButton extends React.Component {
   render() {
     return (
-      <button>Submit</button>
+      <div className="submitButton">
+        <button type="submit">Submit</button>
+      </div>
     );
   }
 }
