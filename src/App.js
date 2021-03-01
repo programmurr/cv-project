@@ -13,21 +13,22 @@ class App extends React.Component {
         name: "",
         email: "",
         phone: ""
-      }
+      }, 
+      infoSubmitted: false
     }
 
     this.handleInfoSubmit = this.handleInfoSubmit.bind(this);
   }
 
-  handleInfoSubmit(info) {
+  handleInfoSubmit(info, status) {
     this.setState({
-      generalInfo: { info }
+      generalInfo: { info },
+      infoSubmitted: status
     });
   }
 
   render() {
-    const { generalInfo } = this.state;
-    console.log(this.state);
+    const { generalInfo, infoSubmitted } = this.state;
 
     return (
       <div className="container">
@@ -37,6 +38,7 @@ class App extends React.Component {
         <GeneralInfo 
           info={generalInfo} 
           onInfoSubmit={this.handleInfoSubmit}
+          infoSubmitted={infoSubmitted}
         />
         <Education />
         <PracticalExperience />
