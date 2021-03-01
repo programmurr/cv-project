@@ -50,7 +50,7 @@ function GeneralInfoDisplay(props) {
         <li>Email: {props.email}</li>
         <li>Phone: {props.phone}</li>
       </ul>
-      <EditButton />
+      <EditButton handleEditClick={props.handleEdit}/>
     </div>
   );
 }
@@ -67,6 +67,7 @@ class GeneralInfo extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleChange(event) {
@@ -84,6 +85,10 @@ class GeneralInfo extends React.Component {
     this.props.onInfoSubmit(this.state, true);
   }
 
+  handleEdit() {
+    this.props.onInfoSubmit(this.state, false);
+  }
+
   render() {
     const { name, email, phone } = this.state;
 
@@ -93,6 +98,7 @@ class GeneralInfo extends React.Component {
         name={name}
         email={email}
         phone={phone}
+        handleEdit={this.handleEdit}
         />
       );
     } else {

@@ -2,9 +2,13 @@ import React from 'react';
 import '../styles/Buttons.css'
 
 class EditButton extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <button>Edit</button>
+      <button onClick={this.props.handleEditClick}>Edit</button>
     );
   }
 }
