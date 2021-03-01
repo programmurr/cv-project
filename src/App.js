@@ -21,11 +21,20 @@ class App extends React.Component {
         studyFromDate: "",
         studyToDate: ""
       },
-      educationSubmitted: false
+      educationSubmitted: false,
+      experienceInfo: {
+        companyName: "",
+        positionTitle: "",
+        experienceFromDate: "",
+        experienceToDate: "",
+        responsibilities: ""
+      },
+      experienceSubmitted: false
     }
 
     this.handleInfoSubmit = this.handleInfoSubmit.bind(this);
     this.handleEducationSubmit = this.handleEducationSubmit.bind(this);
+    this.handleExperienceSubmit = this.handleExperienceSubmit.bind(this);
   }
 
   handleInfoSubmit(info, status) {
@@ -34,8 +43,10 @@ class App extends React.Component {
     this.setState({
       generalInfo: { info },
       infoSubmitted: status,
-      educationInfo: state.education,
-      educationSubmitted: state.educationSubmitted
+      educationInfo: state.educationInfo,
+      educationSubmitted: state.educationSubmitted,
+      experienceInfo: state.experienceInfo,
+      experienceSubmitted: state.experienceSubmitted
     });
   }
 
@@ -46,7 +57,22 @@ class App extends React.Component {
       generalInfo: state.generalInfo,
       infoSubmitted: state.infoSubmitted,
       educationInfo: { info },
-      educationSubmitted: status
+      educationSubmitted: status,
+      experienceInfo: state.experienceInfo,
+      experienceSubmitted: state.experienceSubmitted
+    });
+  }
+
+  handleExperienceSubmit(info, status) {
+    const state = this.state;
+
+    this.setState({
+      generalInfo: state.generalInfo,
+      infoSubmitted: state.infoSubmitted,
+      educationInfo: state.educationInfo,
+      educationSubmitted: state.educationSubmitted,
+      experienceInfo: { info }, 
+      experienceSubmitted: status
     });
   }
 
@@ -55,7 +81,9 @@ class App extends React.Component {
       generalInfo, 
       infoSubmitted,
       educationInfo,
-      educationSubmitted 
+      educationSubmitted,
+      experienceInfo,
+      experienceSubmitted 
     } = this.state;
 
     return (
@@ -73,7 +101,11 @@ class App extends React.Component {
           onEducationSubmit={this.handleEducationSubmit}
           educationSubmitted={educationSubmitted}
         />
-        <PracticalExperience />
+        <PracticalExperience 
+          experienceInfo={experienceInfo}
+          onExperienceSubmit={this.handleExperienceSubmit}
+          experienceSubmitted={experienceSubmitted}
+        />
       </div>
     )
   }

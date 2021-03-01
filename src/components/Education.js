@@ -4,6 +4,8 @@ import SubmitButton from './SubmitButton';
 import EditButton from './EditButton';
 
 function EducationForm(props) {
+  const maxDate = new Date().toISOString().split("T")[0];
+
   return (
     <div className="educationForm">
       <h2>Education</h2>
@@ -27,19 +29,21 @@ function EducationForm(props) {
           />
         </div>
         <div className="studyFromDate">
-          <label htmlFor="studyFromInput">Date From:</label>
+          <label htmlFor="studyFromInput">From:</label>
           <input 
-            type="text"
+            type="date"
             name="studyFromDate"
+            max={maxDate}
             value={props.studyFromDate}
             onChange={props.handleChange}
           />
         </div>
         <div className="studyToDate">
-          <label htmlFor="studyToInput">Date To:</label>
+          <label htmlFor="studyToInput">To:</label>
           <input 
-            type="text"
+            type="date"
             name="studyToDate"
+            max={maxDate}
             value={props.studyToDate}
             onChange={props.handleChange}
           />
@@ -57,10 +61,10 @@ function EducationDisplay(props) {
     <ul>
       <li>School Name: {props.schoolName}</li>
       <li>Course Title: {props.courseTitle}</li>
-      <li>Date From: {props.studyFromDate}</li>
-      <li>Date To: {props.studyToDate}</li>
+      <li>From: {props.studyFromDate}</li>
+      <li>To: {props.studyToDate}</li>
     </ul>
-    <EditButton handleEditClick={props.handleEdit}/>
+    <EditButton handleEditClick={props.handleEdit} />
   </div>
   )
 }
@@ -69,7 +73,7 @@ class Education extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state= {
+    this.state = {
       schoolName: "",
       courseTitle: "",
       studyFromDate: "",
