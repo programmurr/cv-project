@@ -14,21 +14,49 @@ class App extends React.Component {
         email: "",
         phone: ""
       }, 
-      infoSubmitted: false
+      infoSubmitted: false,
+      educationInfo: {
+        schoolName: "",
+        courseTitle: "",
+        studyFromDate: "",
+        studyToDate: ""
+      },
+      educationSubmitted: false
     }
 
     this.handleInfoSubmit = this.handleInfoSubmit.bind(this);
+    this.handleEducationSubmit = this.handleEducationSubmit.bind(this);
   }
 
   handleInfoSubmit(info, status) {
+    const state = this.state;
+
     this.setState({
       generalInfo: { info },
-      infoSubmitted: status
+      infoSubmitted: status,
+      educationInfo: state.education,
+      educationSubmitted: state.educationSubmitted
+    });
+  }
+
+  handleEducationSubmit(info, status) {
+    const state = this.state;
+
+    this.setState({
+      generalInfo: state.generalInfo,
+      infoSubmitted: state.infoSubmitted,
+      educationInfo: { info },
+      educationSubmitted: status
     });
   }
 
   render() {
-    const { generalInfo, infoSubmitted } = this.state;
+    const { 
+      generalInfo, 
+      infoSubmitted,
+      educationInfo,
+      educationSubmitted 
+    } = this.state;
 
     return (
       <div className="container">
@@ -40,7 +68,11 @@ class App extends React.Component {
           onInfoSubmit={this.handleInfoSubmit}
           infoSubmitted={infoSubmitted}
         />
-        <Education />
+        <Education 
+          educationInfo={educationInfo}
+          onEducationSubmit={this.handleEducationSubmit}
+          educationSubmitted={educationSubmitted}
+        />
         <PracticalExperience />
       </div>
     )

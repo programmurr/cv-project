@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/GeneralInfo.css';
 import SubmitButton from './SubmitButton';
-import EditButton from './EditButton'
+import EditButton from './EditButton';
 
 function GeneralInfoForm(props) {
   return (
