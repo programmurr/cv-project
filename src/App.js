@@ -1,35 +1,25 @@
 import React from 'react';
 import './styles/App.css';
+import uniqid from 'uniqid';
 import GeneralInfo from './components/GeneralInfo'
-import Education from './components/Education'
-import PracticalExperience from './components/PracticalExperience'
+import EducationDisplay from './components/EducationDisplay'
+import EducationForm from './components/EducationForm'
+import PracticalExperienceDisplay from './components/PracticalExperienceDisplay'
+import PracticalExperienceForm from './components/PracticalExperienceForm'
 
+// refactor App.render() functions so map() takes place outside of render
+// Work on 'edit' functionality
+// I think each component needs to be given an id when their form is submitted
+// Add validation for dates e.g. 'to' cannot be less than 'from'
 class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      generalInfo: {
-        name: "",
-        email: "",
-        phone: ""
-      }, 
-      infoSubmitted: false,
-      educationInfo: {
-        schoolName: "",
-        courseTitle: "",
-        studyFromDate: "",
-        studyToDate: ""
-      },
-      educationSubmitted: false,
-      experienceInfo: {
-        companyName: "",
-        positionTitle: "",
-        experienceFromDate: "",
-        experienceToDate: "",
-        responsibilities: ""
-      },
-      experienceSubmitted: false
+      generalInfo: [],
+      infoSubmitted: false, 
+      educationInfo: [],
+      experienceInfo: []
     }
 
     this.handleInfoSubmit = this.handleInfoSubmit.bind(this);
@@ -41,38 +31,32 @@ class App extends React.Component {
     const state = this.state;
 
     this.setState({
-      generalInfo: { info },
+      generalInfo: info,
       infoSubmitted: status,
       educationInfo: state.educationInfo,
-      educationSubmitted: state.educationSubmitted,
-      experienceInfo: state.experienceInfo,
-      experienceSubmitted: state.experienceSubmitted
+      experienceInfo: state.experienceInfo
     });
   }
 
-  handleEducationSubmit(info, status) {
+  handleEducationSubmit(info) {
     const state = this.state;
 
     this.setState({
       generalInfo: state.generalInfo,
       infoSubmitted: state.infoSubmitted,
-      educationInfo: { info },
-      educationSubmitted: status,
-      experienceInfo: state.experienceInfo,
-      experienceSubmitted: state.experienceSubmitted
+      educationInfo: state.educationInfo.concat({ info }),
+      experienceInfo: state.experienceInfo
     });
   }
 
-  handleExperienceSubmit(info, status) {
+  handleExperienceSubmit(info) {
     const state = this.state;
 
     this.setState({
       generalInfo: state.generalInfo,
       infoSubmitted: state.infoSubmitted,
       educationInfo: state.educationInfo,
-      educationSubmitted: state.educationSubmitted,
-      experienceInfo: { info }, 
-      experienceSubmitted: status
+      experienceInfo: state.experienceInfo.concat({ info })
     });
   }
 
@@ -81,9 +65,7 @@ class App extends React.Component {
       generalInfo, 
       infoSubmitted,
       educationInfo,
-      educationSubmitted,
       experienceInfo,
-      experienceSubmitted 
     } = this.state;
 
     return (
@@ -96,16 +78,30 @@ class App extends React.Component {
           onInfoSubmit={this.handleInfoSubmit}
           infoSubmitted={infoSubmitted}
         />
-        <Education 
-          educationInfo={educationInfo}
-          onEducationSubmit={this.handleEducationSubmit}
-          educationSubmitted={educationSubmitted}
-        />
-        <PracticalExperience 
-          experienceInfo={experienceInfo}
-          onExperienceSubmit={this.handleExperienceSubmit}
-          experienceSubmitted={experienceSubmitted}
-        />
+        <h2>Education</h2>
+        {educationInfo.length > 0
+          ? educationInfo.map(education => (
+              <EducationDisplay
+                key={uniqid()}
+                educationInfo={education}
+                onEducationSubmit={this.handleEducationSubmit}
+              />
+          ))
+          : <p>Enter your education details below!</p>
+          }
+        <EducationForm onEducationSubmit={this.handleEducationSubmit} />
+        <h2>Practical Experience</h2>
+        {experienceInfo.length > 0
+          ? experienceInfo.map(experience => (
+              <PracticalExperienceDisplay
+                key={uniqid()}
+                experienceInfo={experience}
+                onExperienceSubmit={this.handleExperienceSubmit}
+              />
+          ))
+          : <p>Enter your practical experience below!</p>
+          }
+        <PracticalExperienceForm onExperienceSubmit={this.handleExperienceSubmit} />
       </div>
     )
   }

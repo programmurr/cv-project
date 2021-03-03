@@ -20,7 +20,7 @@ function GeneralInfoForm(props) {
         <div className="generalInfoEmail">
           <label htmlFor="emailInput">Email: </label>
           <input 
-            type="email" 
+            type="text" 
             name="email" 
             value={props.email}
             onChange={props.handleChange}
@@ -50,10 +50,7 @@ function GeneralInfoDisplay(props) {
         <li>Email: {props.email}</li>
         <li>Phone: {props.phone}</li>
       </ul>
-      <div className="buttonsContainer">
-        <EditButton handleEditClick={props.handleEdit} />
-        <AddButton />
-      </div>
+      <EditButton handleEditClick={props.handleEdit}/>
     </div>
   );
 }
