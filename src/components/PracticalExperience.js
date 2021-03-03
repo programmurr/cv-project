@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/PracticalExperience.css'
-import SubmitButton from './SubmitButton';
+import AddButton from './AddButton';
 import EditButton from './EditButton';
 
 function PracticalExperienceForm(props) {
@@ -56,7 +56,7 @@ function PracticalExperienceForm(props) {
             onChange={props.handleChange} 
           />
         </div>
-        <SubmitButton />
+        <AddButton />
       </form>
     </div>
   );
@@ -73,7 +73,10 @@ function PracticalExperienceDisplay(props) {
         <li>To: {props.experienceToDate}</li>
         <li>Responsibilities: {props.responsibilities}</li>
       </ul>
-      <EditButton handleEditClick={props.handleEdit} />
+      <div className="buttonsContainer">
+        <EditButton handleEditClick={props.handleEdit} />
+        <AddButton />
+      </div>
     </div>
   );
 }

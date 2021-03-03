@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/GeneralInfo.css';
-import SubmitButton from './SubmitButton';
+import AddButton from './AddButton';
 import EditButton from './EditButton';
 
 function GeneralInfoForm(props) {
@@ -20,7 +20,7 @@ function GeneralInfoForm(props) {
         <div className="generalInfoEmail">
           <label htmlFor="emailInput">Email: </label>
           <input 
-            type="text" 
+            type="email" 
             name="email" 
             value={props.email}
             onChange={props.handleChange}
@@ -35,7 +35,7 @@ function GeneralInfoForm(props) {
             onChange={props.handleChange}
           />
         </div>
-        <SubmitButton />
+        <AddButton />
       </form>
     </div>
   )
@@ -50,7 +50,10 @@ function GeneralInfoDisplay(props) {
         <li>Email: {props.email}</li>
         <li>Phone: {props.phone}</li>
       </ul>
-      <EditButton handleEditClick={props.handleEdit}/>
+      <div className="buttonsContainer">
+        <EditButton handleEditClick={props.handleEdit} />
+        <AddButton />
+      </div>
     </div>
   );
 }

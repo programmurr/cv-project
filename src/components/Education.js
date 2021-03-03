@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/Education.css';
-import SubmitButton from './SubmitButton';
+import AddButton from './AddButton';
 import EditButton from './EditButton';
 
 function EducationForm(props) {
@@ -48,7 +48,7 @@ function EducationForm(props) {
             onChange={props.handleChange}
           />
         </div>
-        <SubmitButton />
+        <AddButton />
       </form>
     </div>
   )
@@ -64,7 +64,10 @@ function EducationDisplay(props) {
       <li>From: {props.studyFromDate}</li>
       <li>To: {props.studyToDate}</li>
     </ul>
-    <EditButton handleEditClick={props.handleEdit} />
+    <div className="buttonsContainer">
+      <EditButton handleEditClick={props.handleEdit} />
+      <AddButton />
+    </div>
   </div>
   )
 }
