@@ -1,17 +1,20 @@
 import React from 'react';
 import '../styles/Education.css';
 import AddButton from './AddButton';
+import uniqid from 'uniqid';
 
 
-class Education extends React.Component {
+class EducationForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      id: uniqid(),
       schoolName: "",
       courseTitle: "",
       studyFromDate: "",
-      studyToDate: ""
+      studyToDate: "",
+      editClicked: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,11 +34,14 @@ class Education extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.onEducationSubmit(this.state);
+
     this.setState({
+      id: uniqid(),
       schoolName: "",
       courseTitle: "",
       studyFromDate: "",
-      studyToDate: ""
+      studyToDate: "",
+      editClicked: false
     })
   }
 
@@ -46,7 +52,7 @@ class Education extends React.Component {
       schoolName, 
       courseTitle, 
       studyFromDate,
-      studyToDate 
+      studyToDate,
     } = this.state;
 
     return (
@@ -98,4 +104,4 @@ class Education extends React.Component {
   }
 }
 
-export default Education;
+export default EducationForm;
