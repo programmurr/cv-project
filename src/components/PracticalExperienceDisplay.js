@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/PracticalExperience.css'
 import { EditButton, ResubmitButton, DeleteButton } from './Buttons';
+import dateValidator from './dateValidator';
 
 
 function EditExperience(props) {
@@ -20,6 +21,7 @@ function EditExperience(props) {
           <input 
             type="text"
             name="companyName"
+            required="required"
             value={companyName}
             onChange={props.onChange}
           />
@@ -29,6 +31,7 @@ function EditExperience(props) {
           <input 
             type="text"
             name="positionTitle"
+            required="required"
             value={positionTitle}
             onChange={props.onChange}
           />
@@ -38,6 +41,7 @@ function EditExperience(props) {
           <input 
             type="date"
             name="experienceFromDate"
+            required="required"
             max={props.maxDate}
             value={experienceFromDate}
             onChange={props.onChange}
@@ -48,6 +52,7 @@ function EditExperience(props) {
           <input 
             type="date"
             name="experienceToDate"
+            required="required"
             max={props.maxDate}
             value={experienceToDate}
             onChange={props.onChange}
@@ -57,6 +62,7 @@ function EditExperience(props) {
           <label htmlFor="responsibilitiesInput">Responsibilities: </label>
           <textarea
             name="responsibilities"
+            required="required"
             value={responsibilities}
             onChange={props.onChange} 
           />
@@ -109,7 +115,13 @@ class PracticalExperienceDisplay extends React.Component {
 
   handleEditSubmit(event) {
     event.preventDefault();
-    this.props.onExperienceEdit(this.state);
+    const validated = dateValidator(this.state.experienceFromDate, this.state.experienceToDate);
+
+    if (validated) {
+      this.props.onExperienceEdit(this.state);
+    } else {
+      alert("Please enter a valid date");
+    }
   }
 
   handleDeleteClick() {

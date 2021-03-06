@@ -6,9 +6,7 @@ import EducationForm from './components/EducationForm'
 import PracticalExperienceDisplay from './components/PracticalExperienceDisplay'
 import PracticalExperienceForm from './components/PracticalExperienceForm'
 
-// Add validation for dates e.g. 'to' cannot be less than 'from'
-// No blank fields when submitting
-// Fix headers (multiple headers displayed at times)
+
 class App extends React.Component {
   constructor() {
     super();

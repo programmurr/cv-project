@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/Education.css';
 import { AddButton }from './Buttons';
 import uniqid from 'uniqid';
+import dateValidator from './dateValidator';
 
 
 class EducationForm extends React.Component {
@@ -33,16 +34,22 @@ class EducationForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onEducationSubmit(this.state);
+    const validated = dateValidator(this.state.studyFromDate, this.state.studyToDate);
+    
+    if (validated) {
+      this.props.onEducationSubmit(this.state);
 
-    this.setState({
-      id: uniqid(),
-      schoolName: "",
-      courseTitle: "",
-      studyFromDate: "",
-      studyToDate: "",
-      editClicked: false
-    })
+      this.setState({
+        id: uniqid(),
+        schoolName: "",
+        courseTitle: "",
+        studyFromDate: "",
+        studyToDate: "",
+        editClicked: false
+      })
+    } else {
+      alert("Please enter a valid date");
+    }
   }
 
   render() {
@@ -63,6 +70,7 @@ class EducationForm extends React.Component {
             <input 
               type="text"
               name="schoolName"
+              required="required" 
               value={schoolName}
               onChange={this.handleChange}
             />
@@ -72,6 +80,7 @@ class EducationForm extends React.Component {
             <input 
               type="text"
               name="courseTitle"
+              required="required" 
               value={courseTitle}
               onChange={this.handleChange}
             />
@@ -81,6 +90,7 @@ class EducationForm extends React.Component {
             <input 
               type="date"
               name="studyFromDate"
+              required="required"
               max={maxDate}
               value={studyFromDate}
               onChange={this.handleChange}
@@ -91,6 +101,7 @@ class EducationForm extends React.Component {
             <input 
               type="date"
               name="studyToDate"
+              required="required"
               max={maxDate}
               value={studyToDate}
               onChange={this.handleChange}

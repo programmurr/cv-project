@@ -12,6 +12,7 @@ function GeneralInfoForm(props) {
           <input 
             type="text" 
             name="name" 
+            required="required"
             value={props.name}
             onChange={props.handleChange}
           />
@@ -20,7 +21,8 @@ function GeneralInfoForm(props) {
           <label htmlFor="emailInput">Email: </label>
           <input 
             type="text" 
-            name="email" 
+            name="email"
+            required="required" 
             value={props.email}
             onChange={props.handleChange}
           />
@@ -30,6 +32,8 @@ function GeneralInfoForm(props) {
           <input 
             type="text" 
             name="phone" 
+            required="required"
+            pattern="[0-9]{9,13}"
             value={props.phone}
             onChange={props.handleChange}
           />

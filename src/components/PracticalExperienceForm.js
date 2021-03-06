@@ -2,6 +2,8 @@ import React from 'react';
 import '../styles/PracticalExperience.css'
 import { AddButton }from './Buttons';
 import uniqid from 'uniqid';
+import dateValidator from './dateValidator';
+
 
 class PracticalExperienceForm extends React.Component {
   constructor(props) {
@@ -32,16 +34,23 @@ class PracticalExperienceForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onExperienceSubmit(this.state);
+    const validated = dateValidator(this.state.experienceFromDate, this.state.experienceToDate);
 
-    this.setState({
-      id: uniqid(),
-      companyName: "",
-      positionTitle: "",
-      experienceFromDate: "",
-      experienceToDate: "",
-      responsibilities: ""
-    })
+    if (validated) {
+      this.props.onExperienceSubmit(this.state);
+
+      this.setState({
+        id: uniqid(),
+        companyName: "",
+        positionTitle: "",
+        experienceFromDate: "",
+        experienceToDate: "",
+        responsibilities: ""
+      })
+    } else {
+      alert("Please enter a valid date");
+    }
+    
   }
 
   render() {
@@ -64,6 +73,7 @@ class PracticalExperienceForm extends React.Component {
             <input 
               type="text"
               name="companyName"
+              required="required"
               value={companyName}
               onChange={this.handleChange}
             />
@@ -73,6 +83,7 @@ class PracticalExperienceForm extends React.Component {
             <input 
               type="text"
               name="positionTitle"
+              required="required"
               value={positionTitle}
               onChange={this.handleChange}
             />
@@ -82,6 +93,7 @@ class PracticalExperienceForm extends React.Component {
             <input 
               type="date"
               name="experienceFromDate"
+              required="required"
               max={maxDate}
               value={experienceFromDate}
               onChange={this.handleChange}
@@ -92,6 +104,7 @@ class PracticalExperienceForm extends React.Component {
             <input 
               type="date"
               name="experienceToDate"
+              required="required"
               max={maxDate}
               value={experienceToDate}
               onChange={this.handleChange}
@@ -101,6 +114,7 @@ class PracticalExperienceForm extends React.Component {
             <label htmlFor="responsibilitiesInput">Responsibilities: </label>
             <textarea
               name="responsibilities"
+              required="required"
               value={responsibilities}
               onChange={this.handleChange} 
             />

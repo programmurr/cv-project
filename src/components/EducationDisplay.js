@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/Education.css';
 import { EditButton, ResubmitButton, DeleteButton } from './Buttons';
+import dateValidator from './dateValidator';
 
 
 function EditForm(props) {
@@ -14,6 +15,7 @@ function EditForm(props) {
         <input 
           type="text"
           name="schoolName"
+          required="required"
           value={schoolName}
           onChange={props.onChange}
         />
@@ -23,6 +25,7 @@ function EditForm(props) {
         <input 
           type="text"
           name="courseTitle"
+          required="required"
           value={courseTitle}
           onChange={props.onChange}
         />
@@ -32,6 +35,7 @@ function EditForm(props) {
         <input 
           type="date"
           name="studyFromDate"
+          required="required"
           max={props.maxDate}
           value={studyFromDate}
           onChange={props.onChange}
@@ -42,6 +46,7 @@ function EditForm(props) {
         <input 
           type="date"
           name="studyToDate"
+          required="required"
           max={props.maxDate}
           value={studyToDate}
           onChange={props.onChange}
@@ -95,7 +100,13 @@ class EducationDisplay extends React.Component {
 
   handleEditSubmit(event) {
     event.preventDefault();
-    this.props.onEducationEdit(this.state);
+    const validated = dateValidator(this.state.studyFromDate, this.state.studyToDate);
+
+    if (validated) {
+      this.props.onEducationEdit(this.state);
+    } else {
+      alert("Please enter a valid date");
+    }
   }
 
   handleDeleteClick() {
