@@ -15,7 +15,6 @@ function EditExperience(props) {
 
   return (
     <div className="experienceForm">
-      <h2>Practical Experience</h2>
       <form onSubmit={props.handleEditSubmit}>
         <div className="companyName">
           <label htmlFor="companyNameInput">Company Name: </label>
@@ -88,25 +87,7 @@ class PracticalExperienceDisplay extends React.Component {
   }
 
   componentDidMount() {
-    const {
-      id,
-      companyName,
-      positionTitle,
-      experienceFromDate,
-      experienceToDate,
-      responsibilities,
-      editClicked
-    } = this.props.experienceInfo;
-
-    this.setState({
-      id: id,
-      companyName: companyName,
-      positionTitle: positionTitle,
-      experienceFromDate: experienceFromDate,
-      experienceToDate: experienceToDate,
-      responsibilities: responsibilities,
-      editClicked: editClicked
-    });
+    this.setState(this.props.experienceInfo);
   }
 
   handleChange(event) {
@@ -123,15 +104,7 @@ class PracticalExperienceDisplay extends React.Component {
     const state = Object.assign({}, this.state);
     state.editClicked = true;
 
-    this.setState({
-      id: state.id,
-      companyName: state.companyName,
-      positionTitle: state.positionTitle,
-      experienceFromDate: state.experienceFromDate,
-      experienceToDate: state.experienceToDate,
-      responsibilities: state.responsibilities,
-      editClicked: state.editClicked
-    });
+    this.setState(state);
   }
 
   handleEditSubmit(event) {
@@ -163,7 +136,6 @@ class PracticalExperienceDisplay extends React.Component {
     } else {
       return (
         <div className="experienceDisplay">
-          <h2>Experience</h2>
           <ul>
             <li>Organization Name: {companyName}</li>
             <li>Position Title: {positionTitle}</li>

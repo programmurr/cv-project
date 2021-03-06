@@ -9,6 +9,7 @@ import PracticalExperienceForm from './components/PracticalExperienceForm'
 // Make delete functionality
 // Add validation for dates e.g. 'to' cannot be less than 'from'
 // No blank fields when submitting
+// Fix headers (multiple headers displayed at times)
 class App extends React.Component {
   constructor() {
     super();
@@ -57,26 +58,7 @@ class App extends React.Component {
     state.educationInfo[index] = info;
     state.educationInfo[index].editClicked = false;
 
-    this.setState({
-      generalInfo: state.generalInfo,
-      infoSubmitted: state.infoSubmitted,
-      educationInfo: state.educationInfo,
-      experienceInfo: state.experienceInfo
-    })
-  }
-
-  handleExperienceEdit(info) {
-    const state = Object.assign({}, this.state);
-    const index = state.experienceInfo.findIndex((exp => exp.id === info.id));
-    state.experienceInfo[index] = info;
-    state.experienceInfo[index].editClicked = false;
-
-    this.setState({
-      generalInfo: state.generalInfo,
-      infoSubmitted: state.infoSubmitted,
-      educationInfo: state.educationInfo,
-      experienceInfo: state.experienceInfo
-    })
+    this.setState({ state })
   }
 
   handleExperienceSubmit(info) {
@@ -88,6 +70,15 @@ class App extends React.Component {
       educationInfo: state.educationInfo,
       experienceInfo: state.experienceInfo.concat(info)
     });
+  }
+
+  handleExperienceEdit(info) {
+    const state = Object.assign({}, this.state);
+    const index = state.experienceInfo.findIndex((exp => exp.id === info.id));
+    state.experienceInfo[index] = info;
+    state.experienceInfo[index].editClicked = false;
+
+    this.setState({ state })
   }
 
   render() {

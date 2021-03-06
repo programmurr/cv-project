@@ -73,23 +73,7 @@ class EducationDisplay extends React.Component {
   }
 
   componentDidMount() {
-    const { 
-      id, 
-      schoolName, 
-      courseTitle, 
-      studyFromDate, 
-      studyToDate,
-      editClicked
-    } = this.props.educationInfo
-
-    this.setState({
-      id: id,
-      schoolName: schoolName,
-      courseTitle: courseTitle,
-      studyFromDate: studyFromDate,
-      studyToDate: studyToDate,
-      editClicked: editClicked
-    })
+    this.setState(this.props.educationInfo)
   }
 
   handleChange(event) {
@@ -106,14 +90,7 @@ class EducationDisplay extends React.Component {
     const state = Object.assign({}, this.state);
     state.editClicked = true;
 
-    this.setState({
-      id: state.id,
-      schoolName: state.schoolName,
-      courseTitle: state.courseTitle,
-      studyFromDate: state.studyFromDate,
-      studyToDate: state.studyToDate,
-      editClicked: state.editClicked
-    });
+    this.setState(state);
   }
 
   handleEditSubmit(event) {
