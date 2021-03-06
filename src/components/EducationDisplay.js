@@ -1,7 +1,6 @@
 import React from 'react';
-import '../styles/Education.css';
 import { EditButton, ResubmitButton, DeleteButton } from './Buttons';
-import dateValidator from './dateValidator';
+import dateValidator from '../utils/dateValidator';
 
 
 function EditForm(props) {

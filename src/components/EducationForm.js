@@ -1,8 +1,7 @@
 import React from 'react';
-import '../styles/Education.css';
 import { AddButton }from './Buttons';
 import uniqid from 'uniqid';
-import dateValidator from './dateValidator';
+import dateValidator from '../utils/dateValidator';
 
 
 class EducationForm extends React.Component {
