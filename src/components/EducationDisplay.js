@@ -1,14 +1,14 @@
 import React from 'react';
 import '../styles/Education.css';
 import EditButton from './EditButton';
-import AddButton from './AddButton';
+import ResubmitButton from './ResubmitButton';
 
 
 function EditForm(props) {
   const { schoolName, courseTitle, studyFromDate, studyToDate } = props.educationInfo;
 
   return (
-    <div className="educationForm">
+    <div className="educationEditForm">
     <form onSubmit={props.handleEditSubmit}>
       <div className="schoolName">
         <label htmlFor="schoolNameInput">School Name:</label>
@@ -48,7 +48,7 @@ function EditForm(props) {
           onChange={props.onChange}
         />
       </div>
-      <AddButton />
+      <ResubmitButton />
     </form>
   </div>
   )
@@ -81,12 +81,6 @@ class EducationDisplay extends React.Component {
       studyToDate,
       editClicked
     } = this.props.educationInfo
-
-    // let { editClicked } = this.props.educationInfo;
-
-    // if (editClicked === true ) {
-    //   editClicked = false;
-    // }
 
     this.setState({
       id: id,
@@ -128,6 +122,8 @@ class EducationDisplay extends React.Component {
   }
 
   render() {
+    const maxDate = new Date().toISOString().split("T")[0];
+
     const { 
       schoolName, 
       courseTitle, 
@@ -139,6 +135,7 @@ class EducationDisplay extends React.Component {
     if (editClicked) {
       return (
         <EditForm
+          maxDate={maxDate}
           onChange={this.handleChange} 
           educationInfo={this.state}
           handleEditSubmit={this.handleEditSubmit}

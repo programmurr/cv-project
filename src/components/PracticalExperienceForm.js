@@ -1,13 +1,14 @@
 import React from 'react';
 import '../styles/PracticalExperience.css'
 import AddButton from './AddButton';
-
+import uniqid from 'uniqid';
 
 class PracticalExperienceForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      id: uniqid(),
       companyName: "",
       positionTitle: "",
       experienceFromDate: "",
@@ -31,8 +32,10 @@ class PracticalExperienceForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onExperienceSubmit(this.state, true);
+    this.props.onExperienceSubmit(this.state);
+
     this.setState({
+      id: uniqid(),
       companyName: "",
       positionTitle: "",
       experienceFromDate: "",
@@ -43,6 +46,7 @@ class PracticalExperienceForm extends React.Component {
 
   render() {
     const maxDate = new Date().toISOString().split("T")[0];
+
     const {
       companyName,
       positionTitle,
@@ -54,7 +58,6 @@ class PracticalExperienceForm extends React.Component {
 
     return (
       <div className="experienceForm">
-        <h2>Practical Experience</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="companyName">
             <label htmlFor="companyNameInput">Company Name: </label>
