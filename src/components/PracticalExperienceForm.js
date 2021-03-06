@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/PracticalExperience.css'
-import AddButton from './AddButton';
+import { AddButton }from './Buttons';
 import uniqid from 'uniqid';
 
 class PracticalExperienceForm extends React.Component {

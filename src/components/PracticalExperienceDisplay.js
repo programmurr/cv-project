@@ -1,7 +1,6 @@
 import React from 'react';
 import '../styles/PracticalExperience.css'
-import EditButton from './EditButton';
-import ResubmitButton from './ResubmitButton';
+import { EditButton, ResubmitButton, DeleteButton } from './Buttons';
 
 
 function EditExperience(props) {
@@ -84,6 +83,7 @@ class PracticalExperienceDisplay extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
 
   componentDidMount() {
@@ -110,6 +110,10 @@ class PracticalExperienceDisplay extends React.Component {
   handleEditSubmit(event) {
     event.preventDefault();
     this.props.onExperienceEdit(this.state);
+  }
+
+  handleDeleteClick() {
+    this.props.onExperienceDelete(this.state);
   }
 
   render() {
@@ -145,6 +149,7 @@ class PracticalExperienceDisplay extends React.Component {
           </ul>
           <div className="buttonsContainer">
             <EditButton handleEditClick={this.handleEditClick} />
+            <DeleteButton handleDeleteClick={this.handleDeleteClick} />
           </div>
         </div>
       );

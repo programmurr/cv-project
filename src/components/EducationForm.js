@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/Education.css';
-import AddButton from './AddButton';
+import { AddButton }from './Buttons';
 import uniqid from 'uniqid';
 
 

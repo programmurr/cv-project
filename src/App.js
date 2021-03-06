@@ -6,7 +6,6 @@ import EducationForm from './components/EducationForm'
 import PracticalExperienceDisplay from './components/PracticalExperienceDisplay'
 import PracticalExperienceForm from './components/PracticalExperienceForm'
 
-// Make delete functionality
 // Add validation for dates e.g. 'to' cannot be less than 'from'
 // No blank fields when submitting
 // Fix headers (multiple headers displayed at times)
@@ -25,9 +24,11 @@ class App extends React.Component {
 
     this.handleEducationSubmit = this.handleEducationSubmit.bind(this);
     this.handleEducationEdit = this.handleEducationEdit.bind(this);
+    this.handleEducationDelete = this.handleEducationDelete.bind(this);
 
     this.handleExperienceSubmit = this.handleExperienceSubmit.bind(this);
     this.handleExperienceEdit = this.handleExperienceEdit.bind(this);
+    this.handleExperienceDelete = this.handleExperienceDelete.bind(this);
   }
 
   handleInfoSubmit(info, status) {
@@ -61,6 +62,18 @@ class App extends React.Component {
     this.setState({ state })
   }
 
+  handleEducationDelete(info) {
+    const state = Object.assign({}, this.state);
+    const newEducationInfo = state.educationInfo.filter((edu => edu.id !== info.id));
+    
+    this.setState({
+      generalInfo: state.generalInfo,
+      infoSubmitted: state.infoSubmitted,
+      educationInfo: newEducationInfo,
+      experienceInfo: state.experienceInfo
+    })
+  }
+
   handleExperienceSubmit(info) {
     const state = this.state;
 
@@ -79,6 +92,18 @@ class App extends React.Component {
     state.experienceInfo[index].editClicked = false;
 
     this.setState({ state })
+  }
+
+  handleExperienceDelete(info) {
+    const state = Object.assign({}, this.state);
+    const newExperienceInfo = state.experienceInfo.filter((exp => exp.id !== info.id));
+
+    this.setState({
+      generalInfo: state.generalInfo,
+      infoSubmitted: state.infoSubmitted,
+      educationInfo: state.educationInfo,
+      experienceInfo: newExperienceInfo
+    })
   }
 
   render() {
@@ -106,6 +131,7 @@ class App extends React.Component {
                 key={education.id}
                 educationInfo={education}
                 onEducationEdit={this.handleEducationEdit}
+                onEducationDelete={this.handleEducationDelete}
               />
           ))
           : <p>Enter your education details below!</p>
@@ -120,6 +146,7 @@ class App extends React.Component {
                 key={experience.id}
                 experienceInfo={experience}
                 onExperienceEdit={this.handleExperienceEdit}
+                onExperienceDelete={this.handleExperienceDelete}
               />
           ))
           : <p>Enter your practical experience below!</p>

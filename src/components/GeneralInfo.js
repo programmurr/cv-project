@@ -1,7 +1,6 @@
 import React from 'react';
 import '../styles/GeneralInfo.css';
-import AddButton from './AddButton';
-import EditButton from './EditButton';
+import { AddButton, EditButton } from './Buttons';
 
 function GeneralInfoForm(props) {
   return (

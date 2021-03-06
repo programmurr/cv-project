@@ -1,7 +1,6 @@
 import React from 'react';
 import '../styles/Education.css';
-import EditButton from './EditButton';
-import ResubmitButton from './ResubmitButton';
+import { EditButton, ResubmitButton, DeleteButton } from './Buttons';
 
 
 function EditForm(props) {
@@ -70,6 +69,7 @@ class EducationDisplay extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
 
   componentDidMount() {
@@ -96,6 +96,10 @@ class EducationDisplay extends React.Component {
   handleEditSubmit(event) {
     event.preventDefault();
     this.props.onEducationEdit(this.state);
+  }
+
+  handleDeleteClick() {
+    this.props.onEducationDelete(this.state);
   }
 
   render() {
@@ -129,6 +133,7 @@ class EducationDisplay extends React.Component {
           </ul>
           <div className="buttonsContainer">
             <EditButton handleEditClick={this.handleEditClick} />
+            <DeleteButton handleDeleteClick={this.handleDeleteClick} />
           </div>
         </div>
       )
