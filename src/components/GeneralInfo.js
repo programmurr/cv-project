@@ -20,7 +20,7 @@ function GeneralInfoForm(props) {
         <div className="generalInfoEmail">
           <label htmlFor="emailInput">Email: </label>
           <input 
-            type="text" 
+            type="email" 
             name="email"
             required="required" 
             value={props.email}
