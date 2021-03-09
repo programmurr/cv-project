@@ -30,13 +30,9 @@ class App extends React.Component {
   }
 
   handleInfoSubmit(info, status) {
-    const state = this.state;
-
     this.setState({
       generalInfo: [info],
-      infoSubmitted: status,
-      educationInfo: state.educationInfo,
-      experienceInfo: state.experienceInfo
+      infoSubmitted: status
     });
   }
 
@@ -44,10 +40,7 @@ class App extends React.Component {
     const state = this.state;
 
     this.setState({
-      generalInfo: state.generalInfo,
-      infoSubmitted: state.infoSubmitted,
       educationInfo: state.educationInfo.concat(info),
-      experienceInfo: state.experienceInfo
     });
   }
 
@@ -65,10 +58,7 @@ class App extends React.Component {
     const newEducationInfo = state.educationInfo.filter((edu => edu.id !== info.id));
     
     this.setState({
-      generalInfo: state.generalInfo,
-      infoSubmitted: state.infoSubmitted,
       educationInfo: newEducationInfo,
-      experienceInfo: state.experienceInfo
     })
   }
 
@@ -76,9 +66,6 @@ class App extends React.Component {
     const state = this.state;
 
     this.setState({
-      generalInfo: state.generalInfo,
-      infoSubmitted: state.infoSubmitted,
-      educationInfo: state.educationInfo,
       experienceInfo: state.experienceInfo.concat(info)
     });
   }
@@ -97,9 +84,6 @@ class App extends React.Component {
     const newExperienceInfo = state.experienceInfo.filter((exp => exp.id !== info.id));
 
     this.setState({
-      generalInfo: state.generalInfo,
-      infoSubmitted: state.infoSubmitted,
-      educationInfo: state.educationInfo,
       experienceInfo: newExperienceInfo
     })
   }
