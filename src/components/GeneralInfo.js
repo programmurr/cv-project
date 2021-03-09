@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AddButton, EditButton } from './Buttons';
+import useFormInput from '../utils/useFormInput'
 
 function GeneralInfoForm(props) {
   return (
@@ -13,7 +14,7 @@ function GeneralInfoForm(props) {
             name="name" 
             required="required"
             value={props.name}
-            onChange={props.handleChange}
+            onChange={props.handleNameChange}
           />
         </div>
         <div className="generalInfoEmail">
@@ -23,7 +24,7 @@ function GeneralInfoForm(props) {
             name="email"
             required="required" 
             value={props.email}
-            onChange={props.handleChange}
+            onChange={props.handleEmailChange}
           />
         </div>
         <div className="generalInfoPhone">
@@ -34,7 +35,7 @@ function GeneralInfoForm(props) {
             required="required"
             pattern="[0-9]{9,13}"
             value={props.phone}
-            onChange={props.handleChange}
+            onChange={props.handlePhoneChange}
           />
         </div>
         <AddButton />
@@ -57,64 +58,51 @@ function GeneralInfoDisplay(props) {
   );
 }
 
-class GeneralInfo extends React.Component {
-  constructor(props) {
-    super(props);
+function GeneralInfoFunction(props) {
+  const name = useFormInput("");
+  const email = useFormInput("");
+  const phone = useFormInput("");
 
-    this.state = {
-      name: "",
-      email: "",
-      phone: ""
-    }
+  const [genInfo, setGenInfo] = useState(props.info);
+  useEffect(() => {
+    setGenInfo({
+      name: name.value,
+      email: email.value,
+      phone: phone.value
+    });
+  }, [props.info])
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.onInfoSubmit(genInfo, true);
   }
 
-  handleChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    })
+  function handleEdit() {
+    props.onInfoSubmit(genInfo, false);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.onInfoSubmit(this.state, true);
-  }
-
-  handleEdit() {
-    this.props.onInfoSubmit(this.state, false);
-  }
-
-  render() {
-    const { name, email, phone } = this.state;
-
-    if (this.props.infoSubmitted) {
-      return (
-        <GeneralInfoDisplay 
-        name={name}
-        email={email}
-        phone={phone}
-        handleEdit={this.handleEdit}
-        />
-      );
-    } else {
-      return (
-        <GeneralInfoForm 
-        name={name} 
-        email={email}
-        phone={phone}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        />
-      );
-    }
+  if (props.infoSubmitted) {
+    return (
+      <GeneralInfoDisplay 
+      name={name.value}
+      email={email.value}
+      phone={phone.value}
+      handleEdit={handleEdit}
+      />
+    );
+  } else {
+    return (
+      <GeneralInfoForm 
+      name={name.value} 
+      email={email.value}
+      phone={phone.value}
+      handleNameChange={name.onChange}
+      handleEmailChange={email.onChange}
+      handlePhoneChange={phone.onChange}
+      handleSubmit={handleSubmit}
+      />
+    );
   }
 }
 
-export default GeneralInfo;
+export default GeneralInfoFunction;
