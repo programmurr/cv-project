@@ -48,7 +48,7 @@ class App extends React.Component {
     const state = Object.assign({}, this.state);
     const index = state.educationInfo.findIndex((edu => edu.id === info.id));
     state.educationInfo[index] = info;
-    state.educationInfo[index].editClicked = false;
+    // state.educationInfo[index].editClicked = false;
 
     this.setState({ state })
   }

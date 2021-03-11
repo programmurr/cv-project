@@ -7,8 +7,14 @@ export default function useFormInput(initialValue) {
     setValue(e.target.value);
   }
 
+  function handleClear() {
+    setValue("");
+  }
+
   return {
     value,
-    onChange: handleChange
+    setValue,
+    onChange: handleChange,
+    clear: handleClear
   }
 }

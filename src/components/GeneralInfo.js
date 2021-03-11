@@ -58,7 +58,7 @@ function GeneralInfoDisplay(props) {
   );
 }
 
-function GeneralInfoFunction(props) {
+function GeneralInfo(props) {
   const name = useFormInput("");
   const email = useFormInput("");
   const phone = useFormInput("");
@@ -105,4 +105,4 @@ function GeneralInfoFunction(props) {
   }
 }
 
-export default GeneralInfoFunction;
+export default GeneralInfo;
