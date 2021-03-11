@@ -76,13 +76,15 @@ function EducationDisplay(props) {
     setCourseTitle(props.educationInfo.courseTitle);
     setStudyFromDate(props.educationInfo.studyFromDate);
     setStudyToDate(props.educationInfo.studyToDate);
-
-    if (editClicked) {
-      setEditClicked(true);
-    } else {
-      setEditClicked(false);
-    }
-  }, [editClicked])
+    setEditClicked(props.educationInfo.editClicked);
+  }, [
+    props.educationInfo.id,
+    props.educationInfo.schoolName,
+    props.educationInfo.courseTitle,
+    props.educationInfo.studyFromDate,
+    props.educationInfo.studyToDate,
+    props.educationInfo.editClicked
+  ])
 
   function handleNameChange(e) {
     setSchoolName(e.target.value);
