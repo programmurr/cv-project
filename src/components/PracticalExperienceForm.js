@@ -1,80 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AddButton }from './Buttons';
 import uniqid from 'uniqid';
 import dateValidator from '../utils/dateValidator';
+import useFormInput from '../utils/useFormInput';
 
 
-class PracticalExperienceForm extends React.Component {
-  constructor(props) {
-    super(props);
+function PracticalExperienceForm(props) {
+  const maxDate = new Date().toISOString().split("T")[0];
 
-    this.state = {
-      id: uniqid(),
-      companyName: "",
-      positionTitle: "",
-      experienceFromDate: "",
-      experienceToDate: "",
-      responsibilities: ""
+  const [ id, setId ] = useState(uniqid());
+  const companyName = useFormInput("");
+  const positionTitle = useFormInput("");
+  const experienceFromDate = useFormInput("");
+  const experienceToDate = useFormInput("");
+  const responsibilities = useFormInput("");
+  const [ editClicked, setEditClicked ] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const experienceObject = {
+      id: id,
+      companyName: companyName.value,
+      positionTitle: positionTitle.value,
+      experienceFromDate: experienceFromDate.value,
+      experienceToDate: experienceToDate.value,
+      responsibilities: responsibilities.value,
+      editClicked: editClicked
     }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    })
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    const validated = dateValidator(this.state.experienceFromDate, this.state.experienceToDate);
+    const validated = dateValidator(experienceFromDate.value, experienceToDate.value);
 
     if (validated) {
-      this.props.onExperienceSubmit(this.state);
+      props.onExperienceSubmit(experienceObject);
 
-      this.setState({
-        id: uniqid(),
-        companyName: "",
-        positionTitle: "",
-        experienceFromDate: "",
-        experienceToDate: "",
-        responsibilities: ""
-      })
+      setId(uniqid());
+      companyName.setValue("");
+      positionTitle.setValue("");
+      experienceFromDate.setValue("");
+      experienceToDate.setValue("");
+      responsibilities.setValue("");
+      setEditClicked(false);
     } else {
       alert("Please enter a valid date");
     }
-    
   }
 
-  render() {
-    const maxDate = new Date().toISOString().split("T")[0];
-
-    const {
-      companyName,
-      positionTitle,
-      experienceFromDate,
-      experienceToDate,
-      responsibilities
-    } = this.state;
-
-
-    return (
-      <div className="experienceForm">
-        <form onSubmit={this.handleSubmit}>
+  return (
+    <div className="experienceForm">
+        <form onSubmit={handleSubmit}>
           <div className="companyName">
             <label htmlFor="companyNameInput">Company Name: </label>
             <input 
               type="text"
               name="companyName"
               required="required"
-              value={companyName}
-              onChange={this.handleChange}
+              value={companyName.value}
+              onChange={companyName.onChange}
             />
           </div>
           <div className="positionTitle">
@@ -83,8 +65,8 @@ class PracticalExperienceForm extends React.Component {
               type="text"
               name="positionTitle"
               required="required"
-              value={positionTitle}
-              onChange={this.handleChange}
+              value={positionTitle.value}
+              onChange={positionTitle.onChange}
             />
           </div>
           <div className="experienceFromDate">
@@ -94,8 +76,8 @@ class PracticalExperienceForm extends React.Component {
               name="experienceFromDate"
               required="required"
               max={maxDate}
-              value={experienceFromDate}
-              onChange={this.handleChange}
+              value={experienceFromDate.value}
+              onChange={experienceFromDate.onChange}
             />
           </div>
           <div className="experienceToDate">
@@ -105,8 +87,8 @@ class PracticalExperienceForm extends React.Component {
               name="experienceToDate"
               required="required"
               max={maxDate}
-              value={experienceToDate}
-              onChange={this.handleChange}
+              value={experienceToDate.value}
+              onChange={experienceToDate.onChange}
             />
           </div>
           <div className="responsibilities">
@@ -114,16 +96,14 @@ class PracticalExperienceForm extends React.Component {
             <textarea
               name="responsibilities"
               required="required"
-              value={responsibilities}
-              onChange={this.handleChange} 
+              value={responsibilities.value}
+              onChange={responsibilities.onChange} 
             />
           </div>
           <AddButton />
         </form>
       </div>
-    );
-
-  }
+  )
 }
 
 export default PracticalExperienceForm;

@@ -4,6 +4,7 @@ import uniqid from 'uniqid';
 import dateValidator from '../utils/dateValidator';
 import useFormInput from '../utils/useFormInput';
 
+
 function EducationForm(props) {
   const maxDate = new Date().toISOString().split("T")[0];
   const [ id, setId ] = useState(uniqid());
@@ -12,8 +13,6 @@ function EducationForm(props) {
   const studyFromDate = useFormInput("");
   const studyToDate = useFormInput("");
   const [ editClicked, setEditClicked ] = useState(false);
-
-
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -41,7 +40,6 @@ function EducationForm(props) {
     } else {
       alert("Please enter a valid date");
     }
-
   }
 
   return (
