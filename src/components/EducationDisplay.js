@@ -57,7 +57,7 @@ function EducationDisplay(props) {
     });
   }
 
-  function handleEditSubmit(e) {
+  function handleResubmit(e) {
     e.preventDefault();
     const validated = dateValidator(studyFromDate, studyToDate);
 
@@ -83,7 +83,7 @@ function EducationDisplay(props) {
   if (editClicked) {
     return (
       <div className="educationEditForm">
-        <form onSubmit={handleEditSubmit}>
+        <form onSubmit={handleResubmit}>
           <div className="schoolName">
             <label htmlFor="schoolNameInput">School Name:</label>
             <input 

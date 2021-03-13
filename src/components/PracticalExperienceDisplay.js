@@ -74,7 +74,7 @@ function PracticalExperienceDisplay(props) {
     });
   }
 
-  function handleEditSubmit(e) {
+  function handleResubmit(e) {
     e.preventDefault();
     const validated = dateValidator(experienceFromDate, experienceToDate);
 
@@ -101,7 +101,7 @@ function PracticalExperienceDisplay(props) {
   if (editClicked) {
     return (
     <div className="experienceForm">
-      <form onSubmit={handleEditSubmit}>
+      <form onSubmit={handleResubmit}>
         <div className="companyName">
           <label htmlFor="companyNameInput">Company Name: </label>
           <input 
