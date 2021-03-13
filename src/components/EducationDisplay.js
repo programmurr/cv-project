@@ -69,7 +69,8 @@ function EducationDisplay(props) {
         studyFromDate: studyFromDate,
         studyToDate: studyToDate,
         editClicked: false
-      })
+      });
+      setEditClicked(false);
     } else {
       alert("Please enter a valid date");
     }

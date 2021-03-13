@@ -23,6 +23,11 @@ function App() {
     setEducationInfo(newEducationInfo);
   }
 
+  // If below educationInfo schooName (for example) changes from "My Uni" to "My Uni 2" it renders
+  // But if user tries to resubmit without changing anything, render doesn't trigger
+  // Why isn't react detecting that a new object and then a new array is being made,
+  //  and thus triggering a re-render?
+  // Have tried various combos of new Array, Object.create, nothing triggers the render
   function handleEducationEdit(info) {
     const index = educationInfo.findIndex((edu => edu.id === info.id));
     educationInfo[index] = info;

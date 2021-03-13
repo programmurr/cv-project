@@ -87,7 +87,8 @@ function PracticalExperienceDisplay(props) {
         experienceToDate: experienceToDate,
         responsibilities: responsibilities,
         editClicked: false
-      })
+      });
+      setEditClicked(false);
     } else {
       alert("Please enter a valid date");
     }
